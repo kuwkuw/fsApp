@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  div
+    a(href="./users/login") login
+  h1= title
+  p Welcome to #{title}
+
+  div
+    p File tree
+    div(data-component="dir-tree")
+  script(src="/javascripts/directoriesTreeView.js")
+  script(src="/javascripts/directoriesTreePresenter.js")
+  script(src="/javascripts/app.js")

@@ -1,0 +1,41 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.login-form{
+  display: inline-block;
+}
+
+
+/*.directories-tree-container li{*/
+/*    display: inline-block;*/
+/*}*/
+
+.up-directory{
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.directory{
+  font-size: 18px;
+  list-style-image: url("../images/folder.png");
+}
+
+.directory span{
+  cursor: pointer;
+}
+
+.file{
+  list-style-image: url("../images/file.png");
+}
+
+.add-comment-btn{
+  font-size: 10px;
+  margin-left: 20px;
+  /*padding: 0;*/
+}
