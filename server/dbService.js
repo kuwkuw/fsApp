@@ -1,43 +1,40 @@
 
-var mongoClient = require('mongodb').MongoClient,
+var MongoClient = require('mongodb').MongoClient,
     assert = require('assert');
 
 var counter = 0,
     database = null,
-    comentsCollection = null,
+    commentsCollection = null,
     url = 'mongodb://127.0.0.1:27017/test';
 
 
 
+module.exports = DbService;
 
-
-
-function DbService(){
-    this._url = 'mongodb://127.0.0.1:27017/test';
-    this.comentsCollection;
-
-    this._init()
-}
-
-DbService.prototype.addComment = function(){
-
-};
-
-DbService.prototype.findComment = function(){
-
-};
-
-DbService.prototype._init = function(){
-    mongoClient.connect(url, function(err, db) {
-
-    //database = db;
-    this.comentsCollection = db.collection('coments');
-
+MongoClient.connect(url, function(err, db) {
+    assert.equal(null, err);
+    
+    database = db;
+    commentsCollection = database.collection('comments');
     console.log("DATABASE connected correctly to MongoDB server.");
 });
+
+function DbService() {
+    console.warn('DATABASE Closing connection');
+    database.close();
 }
 
+DbService.addComment = function(comment, callBack) {
+   commentsCollection.insertOne(comment, callBack);
+};
 
+DbService.getComments = function(query, callBack){
+    commentsCollection.find(query).toArray(callBack);
+}
+
+DbService.getComment = function(query, callBack){
+    commentsCollection.findOne(query, null, callBack);
+}
 
 
 module.exports = DbService;

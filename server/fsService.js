@@ -5,11 +5,12 @@ function FsService(){
 }
 
 FsService.prototype.getDirStructure = function(path){
-    var normPath = path.replace(/\\/g, "/");
+    var normPath = this.normilaizPath(path);
+    
     console.log('Path:', normPath);
-    var result = [];
+    var directoryContent = [];
     try{
-        result = fs.readdirSync(normPath)
+        directoryContent = fs.readdirSync(normPath)
             .map(function(item){
                 var stat = fs.statSync(normPath + item);
 
@@ -32,8 +33,22 @@ FsService.prototype.getDirStructure = function(path){
     }
     catch(eror){
        console.log(eror);
+       return null;
     }
-    return result;
+    return {
+        path: path,
+        directoryContent: directoryContent
+        
+    }
+};
+
+
+FsService.prototype.normilaizPath = function(path){
+    var normPath = path.replace(/\\/g, "/");
+    if(path[path.length-1] !== '/'){
+        normPath = normPath + '/';
+    }
+    return normPath;
 };
 
 module.exports = FsService;
