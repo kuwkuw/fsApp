@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  div
+    if email
+      sapn.user-mail #{email}
+      a(href="./users/logout") logout
+    else
+      a(href="./users/login") login
+  h1= title
+  p Welcome to #{title} 
+
+  div
+    p File tree
+    div(data-component="dir-tree")
+
+  script(src="/javascripts/bundle.js")
